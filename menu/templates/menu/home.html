@@ -1,0 +1,458 @@
+{% extends 'menu/base.html' %}
+{% load static %}
+
+{% block title %}Accueil - Midway Café{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"/>
+<style>
+.hero-slider {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+.hero-slider .carousel-inner,
+.hero-slider .carousel-item,
+.hero-slider .hero-slide {
+    height: 100vh;
+    min-height: 100vh;
+}
+.hero-slider .hero-slide {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+}
+.hero-slider .hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(120deg, rgba(30,30,30,0.7) 60%, rgba(30,30,30,0.5) 100%);
+    z-index: 1;
+}
+.hero-slider .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+}
+.hero-slider .hero-slide.conviviale-slide .hero-content {
+    z-index: 3;
+}
+.hero-slider .hero-slide.patisserie-slide .hero-content {
+    z-index: 3;
+}
+.hero-slider .hero-content h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    text-shadow: 0 2px 16px #000;
+}
+.hero-slider .hero-content p {
+    font-size: 2rem;
+    text-shadow: 0 1px 8px #000;
+}
+.hero-slider .btn-warning {
+    font-size: 1.5rem;
+    padding: 1rem 3rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    box-shadow: 0 0.5rem 2rem #eebc1d33;
+    margin-top: 2rem;
+}
+.hero-slider .carousel-control-prev, .hero-slider .carousel-control-next {
+    width: 6rem;
+    height: 6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+}
+.hero-slider .carousel-control-prev-icon, .hero-slider .carousel-control-next-icon {
+    width: 3rem;
+    height: 3rem;
+}
+@media (max-width: 768px) {
+    .hero-slider .hero-content h1 { font-size: 2.2rem; }
+    .hero-slider .hero-content p { font-size: 1.1rem; }
+    .hero-slider .btn-warning { font-size: 1rem; padding: 0.7rem 2rem; }
+}
+.hero-slider .hero-content.lower-position {
+    transform: translateY(120px);
+}
+@media (max-width: 768px) {
+    .hero-slider .hero-content.lower-position {
+        transform: translateY(60px);
+    }
+}
+.hero-slider .hero-slide.patisserie-slide {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-color: white !important;
+    position: relative;
+}
+.hero-slider .hero-slide.patisserie-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28%;
+    height: 100%;
+    background-image: url('{% static 'menu/gaufres.jpg' %}');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+.hero-slider .hero-slide.patisserie-slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28%;
+    height: 100%;
+    background-image: url('{% static 'menu/cakes.jpg' %}');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+.hero-slider .hero-slide.conviviale-slide {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-color: white !important;
+    position: relative;
+}
+.hero-slider .hero-slide.conviviale-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 100%;
+    background-image: url('{% static 'menu/behy1.jpg' %}');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+.hero-slider .hero-slide.conviviale-slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    background-image: url('{% static 'menu/behy.jpg' %}');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+.site-cards-row {
+  margin: 3rem 0 2.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.2rem;
+  justify-content: center;
+}
+.site-card {
+  background: #23211e;
+  color: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 32px #0002;
+  padding: 2.2rem 2rem 1.5rem 2rem;
+  min-width: 260px;
+  max-width: 340px;
+  flex: 1 1 280px;
+  text-align: center;
+  transition: box-shadow .2s, transform .2s;
+  border: none;
+}
+.site-card:hover {
+  box-shadow: 0 8px 40px #0005;
+  transform: translateY(-3px) scale(1.03);
+}
+.site-card i {
+  font-size: 2.7rem;
+  margin-bottom: 1.1rem;
+}
+.site-card .fw-bold {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.site-card .small {
+  color: #e0d6c0;
+  font-size: 1.01rem;
+}
+.site-about-section {
+  background: #23211e;
+  color: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 32px #0002;
+  padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+  max-width: 900px;
+  margin: 0 auto 3rem auto;
+}
+.site-about-section h2 {
+  color: #e6c48c;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+}
+.site-about-section p {
+  color: #fff;
+  opacity: 0.93;
+  font-size: 1.08rem;
+}
+.carousel-indicators {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+}
+.carousel-indicators [data-bs-target] {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #6b4322;
+  opacity: 0.35;
+  border: none;
+  transition: opacity 0.3s, background 0.3s;
+  margin: 0 0.2rem;
+}
+.carousel-indicators .active {
+  opacity: 1;
+  background-color: #e6c48c;
+  box-shadow: 0 0 0 3px #6b432244;
+}
+</style>
+<div id="heroSlider" class="carousel slide hero-slider" data-bs-ride="carousel" data-bs-interval="4000">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="hero-slide" style="background-image: url('{% static 'menu/café.jpg' %}');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content animate__animated animate__fadeIn lower-position">
+          <h1 class="animate__animated animate__fadeInDown">Bienvenue au Midway Café</h1>
+          <p class="animate__animated animate__fadeInUp">Le goût, l’ambiance, la passion.<br>Votre pause gourmande à Paris.</p>
+          <a href="{% url 'menu' %}" class="btn btn-warning animate__animated animate__fadeInUp">Voir le menu</a>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="hero-slide patisserie-slide" style="background-image: url('{% static 'menu/patisserie.png' %}');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content animate__animated animate__fadeIn lower-position">
+          <h1 class="animate__animated animate__fadeInDown">Pâtisseries maison</h1>
+          <p class="animate__animated animate__fadeInUp">Des douceurs artisanales pour tous les gourmands.</p>
+          <a href="{% url 'menu' %}" class="btn btn-warning animate__animated animate__fadeInUp">Voir le menu</a>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="hero-slide conviviale-slide" style="background-image: url('{% static 'menu/conviviale.jpg' %}');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content animate__animated animate__fadeIn lower-position">
+          <h1 class="animate__animated animate__fadeInDown">Ambiance conviviale</h1>
+          <p class="animate__animated animate__fadeInUp">Un lieu chaleureux pour se détendre ou partager un moment.</p>
+          <a href="{% url 'reservation' %}" class="btn btn-warning animate__animated animate__fadeInUp">Réserver une table</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Précédent</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroSlider" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Suivant</span>
+  </button>
+</div>
+
+<!-- SECTION INFOS CAFÉ -->
+<div class="cafe-infos-row" style="background: #e6c48c; width:100vw; min-width:100vw; left:50%; right:50%; transform:translateX(-50%); position:relative; padding:2.5rem 0; display:flex; justify-content:center; align-items:center; gap:2.5rem; flex-wrap:wrap; margin-bottom:0;">
+  <div class="cafe-info-card" style="display:flex; flex-direction:column; align-items:center; min-width:220px; max-width:300px; flex:1 1 220px;">
+    <i class="bi bi-cup-hot-fill" style="font-size:2.7rem; color:#6b4322; margin-bottom:1rem;"></i>
+    <div style="font-size:1.5rem; font-weight:700; color:#181716; margin-bottom:0.5rem;">100% Arabica</div>
+    <div style="font-size:1.08rem; color:#181716; opacity:0.85; text-align:center;">Des grains soigneusement sélectionnés pour un goût authentique.</div>
+  </div>
+  <div class="cafe-info-card" style="display:flex; flex-direction:column; align-items:center; min-width:220px; max-width:300px; flex:1 1 220px;">
+    <i class="bi bi-wifi" style="font-size:2.7rem; color:#6b4322; margin-bottom:1rem;"></i>
+    <div style="font-size:1.5rem; font-weight:700; color:#181716; margin-bottom:0.5rem;">Ambiance Cosy & Wifi</div>
+    <div style="font-size:1.08rem; color:#181716; opacity:0.85; text-align:center;">Profitez d’un espace chaleureux avec wifi gratuit pour travailler ou se détendre.</div>
+  </div>
+  <div class="cafe-info-card" style="display:flex; flex-direction:column; align-items:center; min-width:220px; max-width:300px; flex:1 1 220px;">
+    <i class="bi bi-award-fill" style="font-size:2.7rem; color:#6b4322; margin-bottom:1rem;"></i>
+    <div style="font-size:1.5rem; font-weight:700; color:#181716; margin-bottom:0.5rem;">Miidway Primé</div>
+    <div style="font-size:1.08rem; color:#181716; opacity:0.85; text-align:center;">Notre équipe Miidway passionnée, plusieurs fois récompensée.</div>
+  </div>
+  <div class="cafe-info-card" style="display:flex; flex-direction:column; align-items:center; min-width:220px; max-width:300px; flex:1 1 220px;">
+    <i class="bi bi-cake2-fill" style="font-size:2.7rem; color:#6b4322; margin-bottom:1rem;"></i>
+    <div style="font-size:1.5rem; font-weight:700; color:#181716; margin-bottom:0.5rem;">Pâtisseries Maison</div>
+    <div style="font-size:1.08rem; color:#181716; opacity:0.85; text-align:center;">Des douceurs faites maison chaque jour pour accompagner votre café.</div>
+  </div>
+</div>
+<!-- FIN SECTION INFOS CAFÉ -->
+
+<div class="container my-5">
+  <div class="row align-items-center justify-content-center bg-dark rounded-4 shadow-lg p-4 p-md-5" style="min-height:340px;">
+    <div class="col-12 col-md-6 text-white text-start">
+      <div class="mb-2" style="font-size:1.1rem; letter-spacing:1px; color:#e6c48c; font-weight:600;">— À PROPOS</div>
+      <h2 class="fw-bold mb-3" style="font-size:2.3rem; line-height:1.15;">Découvrez le vrai goût<br>du <span style="color:#e6c48c;">café entre amis</span>.</h2>
+      <p class="mb-3" style="opacity:0.92;">Chez Midway Café, chaque tasse est une invitation au partage et à la convivialité. Nous sélectionnons les meilleurs grains pour vous offrir une expérience authentique, dans une ambiance chaleureuse et moderne.</p>
+      <p class="mb-4" style="opacity:0.85;">Venez savourer nos cafés d’exception, nos pâtisseries maison et profitez d’un moment unique entre amis ou en famille.</p>
+      <a href="{% url 'contact' %}" class="btn" style="background:#6b4322; color:#fff; font-weight:600; border-radius:8px; padding:0.7rem 2.2rem; font-size:1.1rem;">EN SAVOIR PLUS</a>
+    </div>
+    <div class="col-12 col-md-6 d-flex justify-content-center align-items-center mt-4 mt-md-0">
+      <img src="{% static 'menu/about-barista-v2.jpg' %}" alt="Barista Midway Café" class="img-fluid rounded-4 shadow" style="max-width:440px; min-width:220px; object-fit:cover; width:100%; height:auto;" loading="lazy">
+    </div>
+  </div>
+</div>
+<div class="site-cards-row">
+  <div class="site-card">
+    <i class="bi bi-cup-hot-fill text-warning"></i>
+    <div class="fw-bold">Cafés d’exception</div>
+    <div class="small">Grains sélectionnés, arômes uniques, préparés avec passion.</div>
+  </div>
+  <div class="site-card">
+    <i class="bi bi-cake2-fill text-danger"></i>
+    <div class="fw-bold">Pâtisseries maison</div>
+    <div class="small">Recettes artisanales, fraîcheur et gourmandise au rendez-vous.</div>
+  </div>
+  <div class="site-card">
+    <i class="bi bi-people-fill text-success"></i>
+    <div class="fw-bold">Ambiance conviviale</div>
+    <div class="small">Un lieu chaleureux pour se détendre ou partager un moment.</div>
+  </div>
+</div>
+<div class="site-about-section">
+  <h2><i class="bi bi-info-circle-fill" style="color:#e6c48c;"></i> À propos</h2>
+  <p>Midway Café est un espace convivial où chaque visite est une expérience unique. Nous sélectionnons les meilleurs grains de café et proposons des pâtisseries faites maison pour ravir vos papilles. Notre équipe vous accueille avec le sourire, que ce soit pour une pause gourmande ou un moment de détente entre amis.</p>
+</div>
+<section class="visit-us-section py-5 w-100" style="background: #23211e; margin-top:4rem; position:relative; left:50%; right:50%; width:100vw; min-width:100vw; transform:translateX(-50%);">
+  <div class="container d-flex justify-content-center">
+    <div class="visit-card bg-dark rounded-5 shadow-lg p-4 p-md-5 text-center" style="max-width: 540px; width:100%;">
+      <div class="d-flex justify-content-center mb-3">
+        <span class="d-inline-flex align-items-center justify-content-center rounded-circle shadow" style="width:64px; height:64px; font-size:2.2rem; background:#e6c48c; color:#181716;">
+          <i class="bi bi-geo-alt-fill"></i>
+        </span>
+      </div>
+      <h2 class="fw-bold mb-2" style="font-size:2.2rem; color:#e6c48c;">Venez nous rendre visite !</h2>
+      <div class="mb-2">
+        <span class="badge" style="background:#e6c48c; color:#181716; font-size:1.1rem; font-weight:700; border-radius:1rem; padding:0.5rem 1.2rem;">Café MIDWAY</span>
+      </div>
+      <div class="mb-2" style="color:#e0d6c0; font-size:1.15rem;">4116, rue de Houmet Essoug, Midoun</div>
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 mb-4 mt-3">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=33.816083,10.9797614" target="_blank" rel="noopener" class="btn btn-warning px-4 py-2 fw-bold shadow" style="border-radius:2rem; font-size:1.1rem; background:#e6c48c; color:#181716; border:none;">Itinéraire</a>
+        <a href="https://www.google.com/maps/place/Caf%C3%A9+MIDWAY/@33.816083,10.9797614,17z/data=!3m1!4b1!4m6!3m5!1s0x13aa973ce882daa5:0xbc7ae864ab7a9106!8m2!3d33.816083!4d10.9797614!16s%2Fg%2F11xn5_vfxs?entry=ttu" target="_blank" rel="noopener" class="btn px-4 py-2 fw-bold shadow" style="border-radius:2rem; font-size:1.1rem; background:transparent; color:#e6c48c; border:2px solid #e6c48c;">Voir sur la carte</a>
+      </div>
+      <div class="mx-auto mb-3 position-relative" style="max-width:420px; border-radius:1.5rem; overflow:hidden; box-shadow:0 0.8rem 2.5rem #000a;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3322.234964295664!2d10.97757231521013!3d33.81608308066109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13aa973ce882daa5%3A0xbc7ae864ab7a9106!2sCaf%C3%A9%20MIDWAY!5e0!3m2!1sfr!2stn!4v1689600000000!5m2!1sfr!2stn" width="100%" height="220" style="border:0; border-radius:1.2rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="text-muted small fs-5 mt-2" style="color:#e6c48c !important;">Parking facile &bull; Accès direct &bull; Ambiance conviviale</div>
+    </div>
+  </div>
+</section>
+<style>
+.visit-us-section {
+  background: #23211e !important;
+  color: #fff;
+  margin-top: 4rem;
+  position: relative;
+  left: 50%; right: 50%; width: 100vw; min-width: 100vw;
+  transform: translateX(-50%);
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+.visit-card {
+  background: #181716 !important;
+  color: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 8px 40px #0005;
+  padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+  max-width: 540px;
+  width: 100%;
+}
+.visit-card h2 {
+  color: #e6c48c;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.7rem;
+}
+.visit-card .badge {
+  background: #e6c48c !important;
+  color: #181716 !important;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 1rem;
+  margin-bottom: 0.7rem;
+}
+.visit-card .btn-warning {
+  background: #e6c48c !important;
+  color: #181716 !important;
+  font-weight: 700;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  margin-right: 0.7rem;
+  box-shadow: 0 2px 8px #e6c48c33;
+  border: none;
+}
+.visit-card .btn-warning:hover, .visit-card .btn-warning:focus {
+  background: #fff !important;
+  color: #181716 !important;
+}
+.visit-card .btn-outline-dark {
+  background: transparent !important;
+  color: #e6c48c !important;
+  border: 2px solid #e6c48c !important;
+  border-radius: 2rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.visit-card .btn-outline-dark:hover, .visit-card .btn-outline-dark:focus {
+  background: #e6c48c !important;
+  color: #181716 !important;
+}
+.visit-card .bg-warning {
+  background: #e6c48c !important;
+  color: #181716 !important;
+}
+.visit-card .text-dark {
+  color: #181716 !important;
+}
+.visit-card .text-white {
+  color: #fff !important;
+}
+.visit-card .rounded-circle {
+  background: #e6c48c !important;
+  color: #181716 !important;
+}
+.visit-card .fs-6 {
+  color: #e6c48c !important;
+}
+.visit-card .text-muted {
+  color: #e0d6c0 !important;
+}
+.visit-card iframe {
+  border-radius: 1.2rem;
+  box-shadow: 0 0.8rem 2.5rem #000a;
+}
+</style>
+{% endblock %}

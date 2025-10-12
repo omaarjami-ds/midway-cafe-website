@@ -1,0 +1,507 @@
+{% extends 'menu/base.html' %}
+{% load static %}
+
+{% block title %}Réservation - Midway Café{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'menu/style.css' %}">
+<style>
+/* ---- Effets WOW pour la Réservation ---- */
+body {
+    overflow-x: hidden;
+}
+
+.reservation-container {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #181716 0%, #23211e 50%, #181716 100%);
+    padding: 2rem 0;
+}
+
+/* Particules flottantes */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #e6c48c;
+    border-radius: 50%;
+    animation: float 6s infinite linear;
+    opacity: 0.6;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Effet de brillance */
+.shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(230, 196, 140, 0.4), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Header avec effet de vague */
+.reservation-hero {
+    background: linear-gradient(135deg, #e6c48c 0%, #d4af37 50%, #bfa046 100%);
+    border-radius: 25px;
+    padding: 4rem 2rem;
+    margin: 2rem 1rem;
+    box-shadow: 0 20px 60px rgba(230, 196, 140, 0.4);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: heroGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+    0% {
+        box-shadow: 0 20px 60px rgba(230, 196, 140, 0.4);
+    }
+    100% {
+        box-shadow: 0 30px 80px rgba(230, 196, 140, 0.6);
+    }
+}
+
+.reservation-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 100%);
+    z-index: 1;
+}
+
+.reservation-hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 2rem;
+}
+
+.reservation-title {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #7a5327;
+    margin-bottom: 1.5rem;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+    letter-spacing: 3px;
+    animation: titlePulse 2s ease-in-out infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.reservation-title i {
+    color: #7a5327;
+    margin-right: 15px;
+    font-size: 3.5rem;
+    vertical-align: middle;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+}
+
+@keyframes titlePulse {
+    0% {
+        transform: scale(1);
+        text-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+    }
+    100% {
+        transform: scale(1.02);
+        text-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+    }
+}
+
+.reservation-title i {
+    color: #7a5327;
+    margin-right: 15px;
+    font-size: 3.5rem;
+    vertical-align: middle;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+        color: #7a5327;
+    }
+    50% {
+        transform: scale(1.1);
+        color: #d4af37;
+    }
+}
+
+.reservation-subtitle {
+    font-size: 1.4rem;
+    color: #7a5327;
+    font-weight: 600;
+    opacity: 0.9;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    animation: subtitleFloat 3s ease-in-out infinite;
+}
+
+@keyframes subtitleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Formulaire avec effets magiques */
+.reservation-form {
+    background: linear-gradient(145deg, #23211e 0%, #181716 100%);
+    border-radius: 25px;
+    padding: 3rem;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+    border: 2px solid #e6c48c;
+    position: relative;
+    animation: formGlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes formGlow {
+    0% {
+        border-color: rgba(230, 196, 140, 0.5);
+        box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+    }
+    100% {
+        border-color: rgba(230, 196, 140, 0.8);
+        box-shadow: 0 35px 100px rgba(230, 196, 140, 0.2);
+    }
+}
+
+/* Champs avec effets magiques */
+.form-field {
+    position: relative;
+    margin-bottom: 2rem;
+    animation: fieldSlideIn 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.form-field:nth-child(1) { animation-delay: 0.1s; }
+.form-field:nth-child(2) { animation-delay: 0.2s; }
+.form-field:nth-child(3) { animation-delay: 0.3s; }
+.form-field:nth-child(4) { animation-delay: 0.4s; }
+.form-field:nth-child(5) { animation-delay: 0.5s; }
+.form-field:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fieldSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reservation-form .form-icon {
+    position: absolute;
+    left: 20px;
+    top: 45px;
+    font-size: 1.3rem;
+    color: #e6c48c;
+    z-index: 3;
+    pointer-events: none;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+        color: #e6c48c;
+    }
+    50% {
+        transform: scale(1.1);
+        color: #d4af37;
+    }
+}
+
+.reservation-form input,
+.reservation-form textarea,
+.reservation-form select {
+    padding-left: 3.5rem !important;
+    border-radius: 15px !important;
+    border: 2px solid #e6c48c !important;
+    background: rgba(24, 23, 22, 0.8) !important;
+    color: #e6c48c !important;
+    box-shadow: 0 5px 20px rgba(230, 196, 140, 0.1);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(10px);
+}
+
+.reservation-form input:focus,
+.reservation-form textarea:focus,
+.reservation-form select:focus {
+    border: 2px solid #d4af37 !important;
+    box-shadow: 0 10px 30px rgba(230, 196, 140, 0.3);
+    background: rgba(35, 33, 30, 0.9) !important;
+    transform: translateY(-2px);
+}
+
+.reservation-form label {
+    font-weight: 700;
+    color: #e6c48c;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    font-size: 1.1rem;
+}
+
+/* Bouton magique */
+.btn-cafe-wow {
+    background: linear-gradient(45deg, #e6c48c, #d4af37, #bfa046);
+    color: #181716;
+    font-size: 1.4rem;
+    border-radius: 50px;
+    padding: 15px 50px;
+    font-weight: 800;
+    box-shadow: 0 10px 30px rgba(230, 196, 140, 0.4);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: buttonGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes buttonGlow {
+    0% {
+        box-shadow: 0 10px 30px rgba(230, 196, 140, 0.4);
+    }
+    100% {
+        box-shadow: 0 15px 40px rgba(230, 196, 140, 0.6);
+    }
+}
+
+.btn-cafe-wow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s;
+}
+
+.btn-cafe-wow:hover::before {
+    left: 100%;
+}
+
+.btn-cafe-wow:hover,
+.btn-cafe-wow:focus {
+    background: linear-gradient(45deg, #d4af37, #bfa046, #e6c48c);
+    color: #181716;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(230, 196, 140, 0.6);
+}
+
+/* Effets de survol pour les champs */
+.reservation-form input:hover,
+.reservation-form textarea:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(230, 196, 140, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .reservation-title {
+        font-size: 2.5rem;
+    }
+    
+    .reservation-hero {
+        padding: 2rem 1rem;
+        margin: 1rem 0.5rem;
+    }
+    
+    .reservation-form {
+        padding: 2rem;
+    }
+}
+</style>
+
+<div class="reservation-container">
+    <!-- Particules flottantes -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="reservation-hero shimmer">
+                <div class="reservation-hero-content">
+                    <h1 class="reservation-title">
+                        <i class="bi bi-calendar-check-fill"></i> Réservez votre table
+                    </h1>
+                    <p class="reservation-subtitle">Vivez une expérience gourmande et chaleureuse chez <span class="fw-bold">Midway Café</span>.<br>Réservez votre moment de plaisir en quelques clics !</p>
+                </div>
+            </div>
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="animation: fieldSlideIn 0.8s ease-out;">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            <form method="post" class="reservation-form">
+                {% csrf_token %}
+                <div class="row g-4">
+                    <div class="col-md-6 form-field">
+                        <span class="form-icon"><i class="bi bi-person-fill"></i></span>
+                        {{ form.nom.label_tag }}
+                        {{ form.nom }}
+                        {% if form.nom.errors %}<div class="text-danger small">{{ form.nom.errors }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6 form-field">
+                        <span class="form-icon"><i class="bi bi-telephone-fill"></i></span>
+                        {{ form.telephone.label_tag }}
+                        {{ form.telephone }}
+                        {% if form.telephone.errors %}<div class="text-danger small">{{ form.telephone.errors }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-4 form-field">
+                        <span class="form-icon"><i class="bi bi-calendar-event"></i></span>
+                        {{ form.date.label_tag }}
+                        {{ form.date }}
+                        {% if form.date.errors %}<div class="text-danger small">{{ form.date.errors }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-4 form-field">
+                        <span class="form-icon"><i class="bi bi-clock-fill"></i></span>
+                        {{ form.heure.label_tag }}
+                        {{ form.heure }}
+                        {% if form.heure.errors %}<div class="text-danger small">{{ form.heure.errors }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-4 form-field">
+                        <span class="form-icon"><i class="bi bi-people-fill"></i></span>
+                        {{ form.personnes.label_tag }}
+                        {{ form.personnes }}
+                        {% if form.personnes.errors %}<div class="text-danger small">{{ form.personnes.errors }}</div>{% endif %}
+                    </div>
+                    <div class="col-12 form-field">
+                        <span class="form-icon"><i class="bi bi-chat-dots-fill"></i></span>
+                        {{ form.message.label_tag }}
+                        {{ form.message }}
+                        {% if form.message.errors %}<div class="text-danger small">{{ form.message.errors }}</div>{% endif %}
+                    </div>
+                </div>
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn btn-cafe-wow">☕ Réserver</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// Créer des particules flottantes
+function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// Effet de typing pour le titre
+function typeWriter(element, text, speed = 100) {
+    let i = 0;
+    element.innerHTML = '';
+    
+    function type() {
+        if (i < text.length) {
+            // Si on arrive à la balise <i>, on l'insère complètement
+            if (text.substring(i).startsWith('<i class="bi bi-calendar-check-fill"></i>')) {
+                element.innerHTML += '<i class="bi bi-calendar-check-fill"></i>';
+                i += '<i class="bi bi-calendar-check-fill"></i>'.length;
+            } else {
+                element.innerHTML += text.charAt(i);
+                i++;
+            }
+            setTimeout(type, speed);
+        }
+    }
+    
+    type();
+}
+
+// Initialisation des effets
+document.addEventListener('DOMContentLoaded', function() {
+    createParticles();
+    
+    // Effet de typing sur le titre
+    const title = document.querySelector('.reservation-title');
+    const originalText = title.innerHTML;
+    
+    // Désactiver l'animation CSS pendant le typing
+    title.style.animation = 'none';
+    
+    setTimeout(() => {
+        typeWriter(title, originalText, 80);
+        
+        // Réactiver l'animation CSS après le typing
+        setTimeout(() => {
+            title.style.animation = 'titlePulse 2s ease-in-out infinite alternate';
+        }, originalText.length * 80 + 1000);
+    }, 1000);
+    
+    // Effet de parallaxe sur les particules
+    window.addEventListener('mousemove', function(e) {
+        const particles = document.querySelectorAll('.particle');
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        
+        particles.forEach((particle, index) => {
+            const speed = (index % 3 + 1) * 0.5;
+            particle.style.transform = `translate(${x * speed * 10}px, ${y * speed * 10}px)`;
+        });
+    });
+});
+</script>
+{% endblock %} 

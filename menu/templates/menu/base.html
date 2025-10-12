@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Midway Café - Le goût, l'ambiance, la passion. Votre pause gourmande à Midoun. Cafés d'exception, pâtisseries maison, ambiance conviviale.">
+    <meta name="keywords" content="café, Midway, Midoun, pâtisseries, restaurant, Tunisie, Djerba">
+    <meta name="author" content="Midway Café">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#e6c48c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Midway Café">
+    <title>{% block title %}Midway Café{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2965/2965567.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+    body { background: #181716; }
+    .navbar-top {
+        background: #181716;
+        color: #fff;
+        font-size: 1.18rem;
+        border-bottom: 1px solid #23211e;
+        padding: 0.65rem 0 0.65rem 0;
+        min-height: 48px;
+    }
+    .navbar-top .social-icons a {
+        color: #e6c48c;
+        margin-right: 1.6rem;
+        font-size: 1.55rem;
+        transition: color 0.2s;
+    }
+    .navbar-top .social-icons a:last-child { margin-right: 0; }
+    .navbar-top .social-icons a:hover { color: #fff; }
+    .navbar-top .top-info i { color: #e6c48c; margin-right: 0.4rem; font-size: 1.25rem; }
+    .navbar-top .top-info span { margin-right: 2.1rem; color: #fff; font-size: 1.13rem; }
+    .navbar-top .top-info span:last-child { margin-right: 0; }
+    .main-navbar {
+        background: #181716;
+        color: #fff;
+        border-bottom: 1px solid #23211e;
+        padding: 0.7rem 0 0.7rem 0;
+    }
+    .main-navbar .navbar-brand {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #e6c48c !important;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .main-navbar .navbar-brand .bi-cup-hot-fill {
+        font-size: 2.5rem;
+        color: #e6c48c;
+    }
+    .main-navbar .brand-cafe {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #fff;
+        margin-left: 0.2rem;
+        letter-spacing: 1px;
+    }
+    .main-navbar .navbar-nav {
+        margin: 0 auto;
+        gap: 2.2rem;
+    }
+    .main-navbar .nav-link {
+        color: #fff !important;
+        font-weight: 500;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+        position: relative;
+        transition: color 0.2s;
+        padding: 0.2rem 0.7rem;
+    }
+    .main-navbar .nav-link.active, .main-navbar .nav-link:hover {
+        color: #e6c48c !important;
+    }
+    .main-navbar .nav-link.active::after, .main-navbar .nav-link:hover::after {
+        content: '';
+        display: block;
+        margin: 0 auto;
+        width: 60%;
+        border-bottom: 2px solid #e6c48c;
+        margin-top: 2px;
+    }
+    .main-navbar .navbar-icons {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+    }
+    .main-navbar .navbar-icons i {
+        color: #fff;
+        font-size: 1.3rem;
+        transition: color 0.2s;
+        cursor: pointer;
+    }
+    .main-navbar .navbar-icons i:hover {
+        color: #e6c48c;
+    }
+    .main-navbar .btn-book {
+        background: #6b4322;
+        color: #fff;
+        font-weight: 700;
+        border-radius: 8px;
+        padding: 0.5rem 1.5rem;
+        margin-left: 1.2rem;
+        border: none;
+        transition: background 0.2s;
+        font-size: 1.1rem;
+    }
+    .main-navbar .btn-book:hover {
+        background: #e6c48c;
+        color: #181716;
+    }
+    @media (max-width: 991px) {
+        .main-navbar .navbar-nav { gap: 1rem; }
+        .main-navbar .navbar-icons { gap: 0.7rem; }
+        .main-navbar .btn-book { margin-left: 0.5rem; padding: 0.5rem 1rem; font-size: 1rem; }
+    }
+    </style>
+</head>
+<body>
+    <!-- Top bar -->
+    <div class="navbar-top d-flex justify-content-between align-items-center px-4">
+        <div class="social-icons d-flex align-items-center">
+            <a href="https://www.facebook.com/profile.php?id=61577189584233" target="_blank"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.tiktok.com/@mid__way?_t=ZM-90UCOCSslnE&_r=1" target="_blank"><i class="bi bi-tiktok"></i></a>
+            <a href="https://www.instagram.com/mid.way.coffe?igsh=MWplZG1oNDZrc2p1Yg==" target="_blank"><i class="bi bi-instagram"></i></a>
+        </div>
+        <div class="top-info d-flex align-items-center">
+            <span><i class="bi bi-geo-alt"></i> <a href="https://www.google.com/maps/place/Caf%C3%A9+MIDWAY/@33.816083,10.9797614,17z/data=!3m1!4b1!4m6!3m5!1s0x13aa973ce882daa5:0xbc7ae864ab7a9106!8m2!3d33.816083!4d10.9797614!16s%2Fg%2F11xn5_vfxs?entry=ttu&g_ep=EgoyMDI1MDcwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="color:inherit; text-decoration:none!important;">4116, rue de Houmet Essoug, Midoun</a></span>
+            <span><i class="bi bi-clock"></i> Lun-Dim 7h - 00h</span>
+            <span><i class="bi bi-telephone"></i> <a href="https://wa.me/21628839178" target="_blank" style="color:inherit; text-decoration:none!important;">+216 28 839 178</a></span>
+        </div>
+    </div>
+    <!-- Main navbar -->
+    <nav class="navbar navbar-expand-lg main-navbar">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+                <i class="bi bi-cup-hot-fill"></i>
+                <span class="brand-cafe">Midway Café</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Afficher la navigation" style="color: #e6c48c;">
+                <span class="navbar-toggler-icon" style="background-image: url(&quot;data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28230, 196, 140, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e&quot;);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'menu' %}active{% endif %}" href="{% url 'menu' %}">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'galerie' %}active{% endif %}" href="{% url 'galerie' %}">Galerie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'reservation' %}active{% endif %}" href="{% url 'reservation' %}">Réserver</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                </ul>
+                <div class="navbar-icons ms-auto">
+                    <a href="{% url 'reservation' %}" class="btn btn-book">RÉSERVER UNE TABLE</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid p-0" style="min-width:100vw;">
+        {% block content %}{% endblock %}
+    </div>
+    {% block visit_us %}{% endblock %}
+    <footer class="footer pt-5 pb-3" style="background:#181716; color:#fff; border-top:1px solid #23211e; font-family:'Montserrat', Arial, sans-serif; font-size:1.13rem; letter-spacing:0.01em;">
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+        .footer-title { color: #e6c48c; font-weight: 700; font-size: 1.35rem; margin-bottom: 1.2rem; letter-spacing:0.02em; }
+        .footer-link, .footer-link:visited { color: #fff; text-decoration: none; transition: color 0.2s; font-size:1.13rem; font-family:'Montserrat', Arial, sans-serif; }
+        .footer-link:hover { color: #e6c48c; text-decoration: underline; }
+        .footer-icon { color: #e6c48c; margin-right: 0.5rem; font-size: 1.18rem; }
+        .footer-social a { color: #fff; font-size: 1.45rem; margin-right: 1.1rem; transition: color 0.2s; }
+        .footer-social a:last-child { margin-right: 0; }
+        .footer-social a:hover { color: #e6c48c; }
+        .footer-hr { border: none; border-top: 1px solid #23211e; margin: 2.2rem 0 1.2rem 0; }
+        .footer-copyright { color: #fff; font-size: 1.08rem; text-align: center; margin-top: 1.7rem; letter-spacing:0.01em; }
+        .footer-copyright .gold { color: #e6c48c; }
+        .footer-opening { min-width: 220px; font-size:1.13rem; }
+        .footer-opening-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.38rem; font-size:1.13rem; }
+        .footer-opening-row .footer-opening-day { flex: 1; }
+        .footer-opening-row .footer-opening-time { flex: 1; text-align: right; }
+        .footer-cols > div { min-width: 210px; }
+        @media (max-width: 991px) {
+            .footer-cols { flex-direction: column; gap: 2.5rem; }
+            .footer-opening { min-width: 0; }
+            .footer-cols > div { min-width: 0; }
+        }
+        </style>
+        <div class="container">
+            <div class="d-flex justify-content-between footer-cols flex-wrap gap-4">
+                <!-- Horaires -->
+                <div class="footer-opening">
+                    <div class="footer-title">Horaires d'ouverture</div>
+                    <div class="footer-opening-row" style="white-space:nowrap;"><span class="footer-opening-day">Lundi</span>&nbsp;&nbsp;&nbsp;7h00 - 00h00</div>
+                    <div class="footer-opening-row" style="white-space:nowrap;"><span class="footer-opening-day">Mardi</span>&nbsp;&nbsp;&nbsp;7h00 - 00h00</div>
+                    <div class="footer-opening-row" style="white-space:nowrap;"><span class="footer-opening-day">Mercredi</span>&nbsp;&nbsp;&nbsp;7h00 - 00h00</div>
+                    <div class="footer-opening-row" style="white-space:nowrap;"><span class="footer-opening-day">Jeudi</span>&nbsp;&nbsp;&nbsp;7h00 - 00h00</div>
+                    <div class="footer-opening-row" style="white-space:nowrap;"><span class="footer-opening-day">Vendredi</span>&nbsp;&nbsp;&nbsp;7h00 - 00h00</div>
+                    <div class="footer-opening-row" style="white-space:nowrap;"><span class="footer-opening-day">Samedi</span>&nbsp;&nbsp;&nbsp;7h00 - 00h00</div>
+                    <div class="footer-opening-row" style="white-space:nowrap;"><span class="footer-opening-day">Dimanche</span>&nbsp;&nbsp;&nbsp;7h00 - 00h00</div>
+                </div>
+                <!-- Liens rapides -->
+                <div>
+                    <div class="footer-title">Liens rapides</div>
+                    <div><a href="{% url 'home' %}" class="footer-link">Accueil</a></div>
+                    <div><a href="{% url 'menu' %}" class="footer-link">Menu</a></div>
+                    <div><a href="{% url 'reservation' %}" class="footer-link">Réservation</a></div>
+                    <div><a href="{% url 'galerie' %}" class="footer-link">Galerie</a></div>
+                    <div><a href="{% url 'contact' %}" class="footer-link">Contact</a></div>
+                </div>
+                <!-- Informations -->
+                <div>
+                    <div class="footer-title">Informations</div>
+                    <div><a href="{% url 'contact' %}" class="footer-link">Nous contacter</a></div>
+                    <div><a href="#" class="footer-link">Mon compte</a></div>
+                    <div><a href="{% url 'reservation' %}" class="footer-link">Réserver</a></div>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <div class="footer-title">Contact</div>
+                    <div class="mb-2"><i class="bi bi-geo-alt footer-icon"></i> <a href="https://www.google.com/maps/place/Caf%C3%A9+MIDWAY/@33.816083,10.9797614,17z/data=!3m1!4b1!4m6!3m5!1s0x13aa973ce882daa5:0xbc7ae864ab7a9106!8m2!3d33.816083!4d10.9797614!16s%2Fg%2F11xn5_vfxs?entry=ttu&g_ep=EgoyMDI1MDcwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="color:inherit; text-decoration:none!important;">4116, rue de Houmet Essoug, Midoun</a></div>
+                    <div class="mb-2"><i class="bi bi-clock footer-icon"></i> Tous les jours : 7h00 - 00h00</div>
+                    <div class="mb-2"><i class="bi bi-telephone footer-icon"></i> <a href="https://wa.me/21628839178" target="_blank" style="color:inherit; text-decoration:none!important;">+216 28 839 178</a></div>
+                    <div class="mb-2"><i class="bi bi-envelope footer-icon"></i> <a href="mailto:mid.way.coffe1@gmail.com" style="color:inherit; text-decoration:none!important;">mid.way.coffe1@gmail.com</a></div>
+                    <div class="mt-3 mb-2"><span class="footer-title" style="font-size:1rem; margin-bottom:0;">Suivez-nous :</span>
+                        <span class="footer-social ms-2">
+                            <a href="https://www.facebook.com/profile.php?id=61577189584233" target="_blank"><i class="bi bi-facebook"></i></a>
+                            <a href="https://www.tiktok.com/@mid__way?_t=ZM-90UCOCSslnE&_r=1" target="_blank"><i class="bi bi-tiktok"></i></a>
+                            <a href="https://www.instagram.com/mid.way.coffe?igsh=MWplZG1oNDZrc2p1Yg==" target="_blank"><i class="bi bi-instagram"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-hr">
+            <div class="footer-copyright">
+                &copy; {{ now|date:'Y' }} Tous droits réservés <span class="gold">Midway Café</span>. Design &amp; Développement par <a href="https://www.linkedin.com/in/omaar-jami-b00185246/" target="_blank" class="gold" style="text-decoration:none;">Omaar Jami</a>.
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

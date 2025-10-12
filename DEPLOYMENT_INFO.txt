@@ -1,0 +1,58 @@
+🚀 INFORMATIONS DE DÉPLOIEMENT - MIDWAY CAFÉ
+================================================
+
+📋 VARIABLES D'ENVIRONNEMENT POUR RAILWAY :
+===========================================
+DEBUG=False
+SECRET_KEY=NUrwUxyrzKzjN7BhpgQE7f9zb0PMZW2-Va2HNsrKcHFSVLVu1_e8iYKV1S1CfQKmPyw
+ALLOWED_HOSTS=*.railway.app,midway-cafe-production.up.railway.app
+
+📱 ÉTAPES DE DÉPLOIEMENT :
+=========================
+
+1. CRÉER UN COMPTE GITHUB :
+   - Allez sur https://github.com
+   - Créez un compte si vous n'en avez pas
+   - Cliquez sur "New repository"
+   - Nom : midway-cafe-website
+   - Description : Site web responsive du Midway Café
+   - Cochez "Public"
+   - Cliquez "Create repository"
+
+2. CONNECTER VOTRE PROJET À GITHUB :
+   - Copiez l'URL de votre repository (ex: https://github.com/VOTRE_USERNAME/midway-cafe-website.git)
+   - Dans le terminal, exécutez :
+     git remote add origin https://github.com/VOTRE_USERNAME/midway-cafe-website.git
+     git branch -M main
+     git push -u origin main
+
+3. DÉPLOYER SUR RAILWAY :
+   - Allez sur https://railway.app
+   - Cliquez "Login" et connectez-vous avec GitHub
+   - Cliquez "New Project"
+   - Sélectionnez "Deploy from GitHub repo"
+   - Choisissez votre repository "midway-cafe-website"
+   - Railway va automatiquement détecter Django
+
+4. CONFIGURER LES VARIABLES :
+   - Dans Railway, allez dans "Variables"
+   - Ajoutez les 3 variables ci-dessus
+   - Cliquez "Deploy"
+
+5. VOTRE SITE SERA EN LIGNE !
+   - URL automatique : https://votre-site.railway.app
+   - Accessible partout dans le monde
+   - Responsive sur tous les appareils
+
+🎯 RÉSULTAT FINAL :
+==================
+✅ Site web professionnel en ligne
+✅ Responsive sur mobile, tablette, PC
+✅ HTTPS sécurisé
+✅ Gratuit avec Railway
+✅ Accessible 24h/24
+
+📞 SUPPORT :
+============
+Si vous avez des questions, contactez-moi !
+Votre site Midway Café sera bientôt en ligne ! 🎉☕

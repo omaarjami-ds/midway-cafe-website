@@ -1,0 +1,291 @@
+{% extends 'menu/base.html' %}
+{% load static %}
+
+{% block title %}Menu - Midway Café{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'menu/style.css' %}">
+<style>
+.menu-pdf-thumb {
+  height: 380px !important;
+  width: auto !important;
+  min-width: 190px !important;
+  max-width: 380px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 1px 2px #0002 !important;
+  object-fit: contain !important;
+  background: #fff !important;
+  padding: 1px !important;
+  margin-bottom: 0 !important;
+  margin-right: 0 !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+}
+.menu-pdf-thumb:last-child {
+  margin-right: 2px !important;
+}
+.menu-pdf-gallery {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  gap: 4px !important;
+  align-items: flex-end !important;
+  background: #181716 !important;
+  padding: 32px 0 32px 2px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 12px #0002 !important;
+}
+
+/* Styles pour les boutons de navigation du menu */
+.nav-btn-menu:hover {
+  color: #fff !important;
+  background: #e6c48c !important;
+  transform: translateY(-50%) scale(1.1) !important;
+  box-shadow: 0 6px 20px rgba(230, 196, 140, 0.4) !important;
+}
+
+/* Styles pour les nouvelles cartes de menu */
+.menu-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.menu-item-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #e6c48c;
+  flex: 1;
+}
+
+.menu-item-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #d4af37;
+  background: rgba(212, 175, 55, 0.1);
+  padding: 5px 10px;
+  border-radius: 15px;
+  border: 1px solid #d4af37;
+}
+
+.menu-item-desc {
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.menu-item-img-large {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.nav-btn-menu.disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+  border-color: #666 !important;
+  color: #666 !important;
+}
+
+.nav-btn-menu.disabled:hover {
+  transform: translateY(-50%) scale(1) !important;
+  background: rgba(24, 23, 22, 0.9) !important;
+  color: #666 !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3) !important;
+}
+
+#closeModal:hover {
+  color: #fff !important;
+  background: #e6c48c !important;
+  transform: scale(1.1) !important;
+}
+</style>
+<div class="menu-hero" style="background-image: url('{% static 'menu/café.jpg' %}');">
+    <h1 class="menu-title">Menu</h1>
+</div>
+<div class="menu-special-section">
+    <div class="menu-special-label">NOTRE SÉLECTION SPÉCIALE</div>
+    <div class="menu-special-main">Savourez notre sélection de menus</div>
+    <div class="menu-special-desc">Découvrez nos boissons et douceurs, préparées avec passion pour éveiller vos papilles.</div>
+    <div class="menu-filters">
+        <a class="menu-filter-btn active" data-cat="tous" href="#" id="btn-tous">Tous</a>
+        <a class="menu-filter-btn" data-cat="petitdej" href="#">Petit Déj</a>
+        <a class="menu-filter-btn" data-cat="cafe" href="#">Café</a>
+        <a class="menu-filter-btn" data-cat="theboisson" href="#">Thé & Boisson</a>
+        <a class="menu-filter-btn" data-cat="jus" href="#">Jus</a>
+        <a class="menu-filter-btn" data-cat="jwajemmojito" href="#">Jwajem & Mojito</a>
+        <a class="menu-filter-btn" data-cat="crepegaufre" href="#">Crêpes & Gaufre</a>
+        <a class="menu-filter-btn" data-cat="fruitomelette" href="#">Fruit & Omelette</a>
+        <a class="menu-filter-btn" data-cat="viennoiserieglace" href="#">Viennoiserie & Glace</a>
+        <a class="menu-filter-btn" data-cat="chicha" href="#">Chicha</a>
+    </div>
+
+    <!-- Galerie d'images PDF dynamique -->
+    <div id="pdf-gallery-container">
+        {% include 'menu/partials/gallery.html' %}
+    </div>
+
+    <!-- Modale pour agrandir l'image -->
+    <div id="imgModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
+      <span id="closeModal" style="position:absolute; top:30px; right:50px; color:#e6c48c; font-size:3rem; font-weight:bold; cursor:pointer; z-index:10001; background:rgba(24,23,22,0.8); border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; border:2px solid #e6c48c;">&times;</span>
+      <div id="prevBtn" class="nav-btn-menu" style="position:absolute; left:30px; top:50%; transform:translateY(-50%); color:#e6c48c; font-size:2.5rem; font-weight:bold; cursor:pointer; background:rgba(24,23,22,0.9); border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; z-index:10001; border:2px solid #e6c48c; box-shadow:0 4px 16px rgba(0,0,0,0.3);">‹</div>
+      <div id="nextBtn" class="nav-btn-menu" style="position:absolute; right:30px; top:50%; transform:translateY(-50%); color:#e6c48c; font-size:2.5rem; font-weight:bold; cursor:pointer; background:rgba(24,23,22,0.9); border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; z-index:10001; border:2px solid #e6c48c; box-shadow:0 4px 16px rgba(0,0,0,0.3);">›</div>
+      <img id="modalImg" src="" alt="Image agrandie" style="max-width:80vw; max-height:80vh; border-radius:12px; box-shadow:0 8px 40px rgba(230,196,140,0.3); display:block; margin:auto;">
+    </div>
+    <script>
+    // Variables globales pour la navigation du menu
+    let currentMenuImageIndex = 0;
+    let menuImages = [];
+
+    document.addEventListener('DOMContentLoaded', function() {
+      function loadGallery(cat) {
+        fetch(`/menu/gallery_partial/?cat=${cat}`)
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('pdf-gallery-container').innerHTML = data.html;
+            // Réinitialiser la liste des images après le chargement
+            initializeMenuImages();
+          });
+      }
+
+      // Initialiser la liste des images du menu
+      function initializeMenuImages() {
+        const galleryImages = document.querySelectorAll('#pdf-gallery .menu-pdf-thumb');
+        menuImages = Array.from(galleryImages).map(img => img.src);
+      }
+
+      document.querySelectorAll('.menu-filter-btn[data-cat]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelectorAll('.menu-filter-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          loadGallery(this.dataset.cat);
+        });
+      });
+
+      // Initialiser les images au chargement de la page
+      initializeMenuImages();
+    });
+
+    function openModal(src) {
+      var modal = document.getElementById('imgModal');
+      var modalImg = document.getElementById('modalImg');
+      
+      // Trouver l'index de l'image actuelle
+      currentMenuImageIndex = menuImages.findIndex(img => img === src);
+      
+      modal.style.display = 'flex';
+      modalImg.src = src;
+      
+      // Mettre à jour les boutons de navigation
+      updateMenuNavigationButtons();
+    }
+
+    function nextMenuImage() {
+      if (currentMenuImageIndex < menuImages.length - 1) {
+        currentMenuImageIndex++;
+        updateMenuModalImage();
+      }
+    }
+
+    function previousMenuImage() {
+      if (currentMenuImageIndex > 0) {
+        currentMenuImageIndex--;
+        updateMenuModalImage();
+      }
+    }
+
+    function updateMenuModalImage() {
+      const modalImg = document.getElementById('modalImg');
+      modalImg.src = menuImages[currentMenuImageIndex];
+      updateMenuNavigationButtons();
+    }
+
+    function updateMenuNavigationButtons() {
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      
+      // Bouton précédent
+      if (currentMenuImageIndex === 0) {
+        prevBtn.classList.add('disabled');
+      } else {
+        prevBtn.classList.remove('disabled');
+      }
+      
+      // Bouton suivant
+      if (currentMenuImageIndex === menuImages.length - 1) {
+        nextBtn.classList.add('disabled');
+      } else {
+        nextBtn.classList.remove('disabled');
+      }
+    }
+
+    // Event listeners pour les boutons de navigation
+    document.getElementById('prevBtn').onclick = function() {
+      previousMenuImage();
+    }
+
+    document.getElementById('nextBtn').onclick = function() {
+      nextMenuImage();
+    }
+
+    document.getElementById('closeModal').onclick = function() {
+      document.getElementById('imgModal').style.display = 'none';
+    }
+
+    document.getElementById('imgModal').onclick = function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    }
+
+    // Navigation au clavier
+    document.addEventListener('keydown', function(event) {
+      const modal = document.getElementById('imgModal');
+      if (modal.style.display === 'flex') {
+        switch(event.key) {
+          case 'Escape':
+            modal.style.display = 'none';
+            break;
+          case 'ArrowLeft':
+            previousMenuImage();
+            break;
+          case 'ArrowRight':
+            nextMenuImage();
+            break;
+        }
+      }
+    });
+    </script>
+</div>
+<div class="menu-listing">
+    <div class="menu-grid">
+        {% for item in menu_items %}
+        <div class="menu-item-card">
+            <div class="menu-item-header">
+                <div class="menu-item-title">{{ item.name|upper }}</div>
+                <div class="menu-item-price">{{ item.price }} DT</div>
+            </div>
+            <div class="menu-item-desc">{{ item.description }}</div>
+            <div class="menu-item-img-large">
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-top: 15px;">
+                {% elif 'latte' in item.name|lower %}
+                    <img src="https://cdn-icons-png.flaticon.com/512/3047/3047926.png" alt="latte" style="width: 100%; height: 200px; object-fit: contain; border-radius: 8px; margin-top: 15px; background: #f5f5f5; padding: 20px;">
+                {% elif 'mocha' in item.name|lower %}
+                    <img src="https://cdn-icons-png.flaticon.com/512/415/415733.png" alt="mocha" style="width: 100%; height: 200px; object-fit: contain; border-radius: 8px; margin-top: 15px; background: #f5f5f5; padding: 20px;">
+                {% elif 'macchiato' in item.name|lower %}
+                    <img src="https://cdn-icons-png.flaticon.com/512/415/415734.png" alt="macchiato" style="width: 100%; height: 200px; object-fit: contain; border-radius: 8px; margin-top: 15px; background: #f5f5f5; padding: 20px;">
+                {% elif 'tea' in item.name|lower or 'thé' in item.name|lower %}
+                    <img src="https://cdn-icons-png.flaticon.com/512/415/415748.png" alt="tea" style="width: 100%; height: 200px; object-fit: contain; border-radius: 8px; margin-top: 15px; background: #f5f5f5; padding: 20px;">
+                {% else %}
+                    <img src="https://cdn-icons-png.flaticon.com/512/415/415729.png" alt="cafe" style="width: 100%; height: 200px; object-fit: contain; border-radius: 8px; margin-top: 15px; background: #f5f5f5; padding: 20px;">
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

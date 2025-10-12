@@ -1,0 +1,4 @@
+DEBUG=False
+SECRET_KEY=your-secret-key-here
+DATABASE_URL=postgresql://user:password@host:port/database
+ALLOWED_HOSTS=your-domain.com,www.your-domain.com

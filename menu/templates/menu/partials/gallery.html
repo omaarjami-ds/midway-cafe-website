@@ -1,0 +1,14 @@
+{% load static %}
+{% if image_files|length <= 4 %}
+<div id="pdf-gallery" class="menu-pdf-gallery" style="display: flex; justify-content: center;">
+    {% for img in image_files %}
+        <img src="{% static img %}" alt="Page menu PDF {{ forloop.counter }}" class="menu-pdf-thumb" onclick="openModal(this.src)" />
+    {% endfor %}
+</div>
+{% else %}
+<div id="pdf-gallery" class="menu-pdf-gallery" style="display: flex;">
+    {% for img in image_files %}
+        <img src="{% static img %}" alt="Page menu PDF {{ forloop.counter }}" class="menu-pdf-thumb" onclick="openModal(this.src)" />
+    {% endfor %}
+</div>
+{% endif %} 
