@@ -133,14 +133,22 @@ if not DEBUG:
     # En production, servir les médias via WhiteNoise
     STATICFILES_DIRS += [MEDIA_ROOT]
 
-# Configuration WhiteNoise pour Render
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# Configuration pour Render - Utiliser le système statique Django standard
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Configuration pour servir les fichiers statiques
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+
+# Configuration pour servir les fichiers statiques en production
+STATICFILES_DIRS = [
+    BASE_DIR / 'menu' / 'static',
+]
+
+# Configuration WhiteNoise uniquement pour les médias
+WHITENOISE_USE_FINDERS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
