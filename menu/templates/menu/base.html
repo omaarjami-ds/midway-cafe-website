@@ -297,10 +297,58 @@
         .footer-opening-row .footer-opening-day { flex: 1; }
         .footer-opening-row .footer-opening-time { flex: 1; text-align: right; }
         .footer-cols > div { min-width: 210px; }
+        /* Responsive footer - maintient la même forme sur tous les appareils */
+        @media (max-width: 1200px) {
+            .footer-cols { gap: 2rem; }
+            .footer-cols > div { min-width: 180px; }
+        }
+        
         @media (max-width: 991px) {
-            .footer-cols { flex-direction: column; gap: 2.5rem; }
-            .footer-opening { min-width: 0; }
-            .footer-cols > div { min-width: 0; }
+            .footer-cols { 
+                flex-direction: row; 
+                flex-wrap: wrap; 
+                gap: 1.5rem; 
+                justify-content: center;
+            }
+            .footer-opening { min-width: 200px; }
+            .footer-cols > div { 
+                min-width: 180px; 
+                flex: 1 1 45%;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .footer-cols { 
+                flex-direction: row; 
+                flex-wrap: wrap; 
+                gap: 1rem; 
+                justify-content: center;
+            }
+            .footer-cols > div { 
+                min-width: 150px; 
+                flex: 1 1 40%;
+                text-align: center;
+            }
+            .footer-title { font-size: 1.2rem; }
+            .footer-link { font-size: 1rem; }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-cols { 
+                flex-direction: row; 
+                flex-wrap: wrap; 
+                gap: 0.8rem; 
+                justify-content: center;
+            }
+            .footer-cols > div { 
+                min-width: 140px; 
+                flex: 1 1 45%;
+                text-align: center;
+            }
+            .footer-title { font-size: 1.1rem; }
+            .footer-link { font-size: 0.9rem; }
+            .footer-opening-row { font-size: 0.9rem; }
         }
         </style>
         <div class="container">
