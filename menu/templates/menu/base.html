@@ -138,59 +138,6 @@
         margin-top: 2px;
     }
     
-    /* Force l'état actif pour toutes les pages */
-    .main-navbar .nav-link.active {
-        color: #e6c48c !important;
-        font-weight: 600;
-    }
-    .main-navbar .nav-link.active::after {
-        content: '';
-        display: block;
-        margin: 0 auto;
-        width: 60%;
-        border-bottom: 2px solid #e6c48c;
-        margin-top: 2px;
-    }
-    
-    /* Styles spécifiques pour le menu mobile */
-    @media (max-width: 991px) {
-        .navbar-collapse {
-            background: rgba(24, 23, 22, 0.98);
-            border-radius: 8px;
-            margin-top: 1rem;
-            padding: 1rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-        
-        .navbar-nav {
-            text-align: center;
-        }
-        
-        .navbar-nav .nav-link {
-            color: #fff !important;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            margin: 0.2rem 0;
-        }
-        
-        .navbar-nav .nav-link.active {
-            color: #e6c48c !important;
-            font-weight: 600;
-        }
-        
-        .navbar-nav .nav-link.active::after {
-            content: '';
-            display: block;
-            margin: 0.3rem auto 0;
-            width: 60%;
-            border-bottom: 2px solid #e6c48c;
-        }
-        
-        .navbar-icons {
-            justify-content: center;
-            margin-top: 1rem;
-        }
-    }
     .main-navbar .navbar-icons {
         display: flex;
         align-items: center;
@@ -297,58 +244,10 @@
         .footer-opening-row .footer-opening-day { flex: 1; }
         .footer-opening-row .footer-opening-time { flex: 1; text-align: right; }
         .footer-cols > div { min-width: 210px; }
-        /* Responsive footer - maintient la même forme sur tous les appareils */
-        @media (max-width: 1200px) {
-            .footer-cols { gap: 2rem; }
-            .footer-cols > div { min-width: 180px; }
-        }
-        
         @media (max-width: 991px) {
-            .footer-cols { 
-                flex-direction: row; 
-                flex-wrap: wrap; 
-                gap: 1.5rem; 
-                justify-content: center;
-            }
-            .footer-opening { min-width: 200px; }
-            .footer-cols > div { 
-                min-width: 180px; 
-                flex: 1 1 45%;
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .footer-cols { 
-                flex-direction: row; 
-                flex-wrap: wrap; 
-                gap: 1rem; 
-                justify-content: center;
-            }
-            .footer-cols > div { 
-                min-width: 150px; 
-                flex: 1 1 40%;
-                text-align: center;
-            }
-            .footer-title { font-size: 1.2rem; }
-            .footer-link { font-size: 1rem; }
-        }
-        
-        @media (max-width: 576px) {
-            .footer-cols { 
-                flex-direction: row; 
-                flex-wrap: wrap; 
-                gap: 0.8rem; 
-                justify-content: center;
-            }
-            .footer-cols > div { 
-                min-width: 140px; 
-                flex: 1 1 45%;
-                text-align: center;
-            }
-            .footer-title { font-size: 1.1rem; }
-            .footer-link { font-size: 0.9rem; }
-            .footer-opening-row { font-size: 0.9rem; }
+            .footer-cols { flex-direction: column; gap: 2.5rem; }
+            .footer-opening { min-width: 0; }
+            .footer-cols > div { min-width: 0; }
         }
         </style>
         <div class="container">
