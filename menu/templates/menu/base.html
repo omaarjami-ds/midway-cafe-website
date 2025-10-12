@@ -137,6 +137,60 @@
         border-bottom: 2px solid #e6c48c;
         margin-top: 2px;
     }
+    
+    /* Force l'état actif pour toutes les pages */
+    .main-navbar .nav-link.active {
+        color: #e6c48c !important;
+        font-weight: 600;
+    }
+    .main-navbar .nav-link.active::after {
+        content: '';
+        display: block;
+        margin: 0 auto;
+        width: 60%;
+        border-bottom: 2px solid #e6c48c;
+        margin-top: 2px;
+    }
+    
+    /* Styles spécifiques pour le menu mobile */
+    @media (max-width: 991px) {
+        .navbar-collapse {
+            background: rgba(24, 23, 22, 0.98);
+            border-radius: 8px;
+            margin-top: 1rem;
+            padding: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .navbar-nav {
+            text-align: center;
+        }
+        
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            margin: 0.2rem 0;
+        }
+        
+        .navbar-nav .nav-link.active {
+            color: #e6c48c !important;
+            font-weight: 600;
+        }
+        
+        .navbar-nav .nav-link.active::after {
+            content: '';
+            display: block;
+            margin: 0.3rem auto 0;
+            width: 60%;
+            border-bottom: 2px solid #e6c48c;
+        }
+        
+        .navbar-icons {
+            justify-content: center;
+            margin-top: 1rem;
+        }
+    }
     .main-navbar .navbar-icons {
         display: flex;
         align-items: center;
