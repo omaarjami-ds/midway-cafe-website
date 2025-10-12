@@ -209,6 +209,95 @@ img:hover, .img-cafe:hover {
   transform: translateY(-4px) scale(1.02);
 }
 
+/* ---- En-têtes uniformes pour toutes les sections ---- */
+
+/* Style d'en-tête uniforme (comme la page réservations) */
+.section-header {
+  background: linear-gradient(135deg, #181716 0%, #23211e 50%, #181716 100%);
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(230, 196, 140, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(230, 196, 140, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.section-header-icon {
+  font-size: 3rem;
+  color: var(--cafe-gold);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.section-header-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.section-header-subtitle {
+  font-size: 1.2rem;
+  color: var(--cafe-gold);
+  margin-bottom: 0.5rem;
+}
+
+.section-header-description {
+  font-size: 1rem;
+  color: #ccc;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Responsive pour les en-têtes */
+@media (max-width: 768px) {
+  .section-header {
+    padding: 2rem 1rem;
+  }
+  .section-header-icon {
+    font-size: 2.5rem;
+  }
+  .section-header-title {
+    font-size: 2rem;
+  }
+  .section-header-subtitle {
+    font-size: 1.1rem;
+  }
+  .section-header-description {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-header {
+    padding: 1.5rem 0.5rem;
+  }
+  .section-header-icon {
+    font-size: 2rem;
+  }
+  .section-header-title {
+    font-size: 1.8rem;
+  }
+  .section-header-subtitle {
+    font-size: 1rem;
+  }
+  .section-header-description {
+    font-size: 0.85rem;
+  }
+}
+
 /* ---- Responsive Design Amélioré ---- */
 
 /* Grandes tablettes et petits écrans (768px - 1024px) */
