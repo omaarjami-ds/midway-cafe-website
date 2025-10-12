@@ -24,6 +24,5 @@ urlpatterns = [
     path('', include('menu.urls')),
 ]
 
-# Configuration pour servir les images uploadées en développement
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Configuration pour servir les images uploadées
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

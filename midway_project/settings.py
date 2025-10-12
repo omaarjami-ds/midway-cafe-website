@@ -128,6 +128,11 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 
+# Configuration pour Render - servir les médias via WhiteNoise
+if not DEBUG:
+    # En production, servir les médias via WhiteNoise
+    STATICFILES_DIRS += [MEDIA_ROOT]
+
 # WhiteNoise configuration
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
