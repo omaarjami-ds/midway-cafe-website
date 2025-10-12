@@ -1,3 +1,9 @@
 DEBUG=False
 SECRET_KEY=NUrwUxyrzKzjN7BhpgQE7f9zb0PMZW2-Va2HNsrKcHFSVLVu1_e8iYKV1S1CfQKmPyw
 ALLOWED_HOSTS=midway-cafe-website.onrender.com,*.onrender.com
+
+# Configuration Twilio pour les notifications WhatsApp
+TWILIO_ACCOUNT_SID=your-twilio-account-sid
+TWILIO_AUTH_TOKEN=your-twilio-auth-token
+TWILIO_FROM_WHATSAPP=whatsapp:+14155238886
+TWILIO_TO_WHATSAPP=whatsapp:+21656012373
