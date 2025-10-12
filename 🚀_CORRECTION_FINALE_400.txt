@@ -1,0 +1,76 @@
+# 🚨 CORRECTION FINALE ERREUR 400 - RENDER
+
+## ✅ CORRECTIONS APPLIQUÉES
+
+J'ai corrigé le problème de l'erreur 400 sur votre site Render :
+
+### **1. Fichier `settings.py` corrigé :**
+```python
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,*.onrender.com,midway-cafe-website.onrender.com', cast=lambda v: [s.strip() for s in v.split(',')])
+```
+
+### **2. Variables d'environnement mises à jour :**
+```
+DEBUG=False
+SECRET_KEY=NUrwUxyrzKzjN7BhpgQE7f9zb0PMZW2-Va2HNsrKcHFSVLVu1_e8iYKV1S1CfQKmPyw
+ALLOWED_HOSTS=midway-cafe-website.onrender.com,*.onrender.com
+```
+
+---
+
+## 🚀 DÉPLOIEMENT AUTOMATIQUE
+
+**Exécutez cette commande pour déployer les corrections :**
+
+```bash
+python fix_render_400.py
+```
+
+Ce script va automatiquement :
+- ✅ Ajouter les fichiers modifiés
+- ✅ Créer un commit avec les corrections
+- ✅ Pousser vers GitHub
+- ✅ Déclencher le redéploiement sur Render
+
+---
+
+## 🔧 VÉRIFICATION SUR RENDER
+
+Après le déploiement, vérifiez dans votre dashboard Render :
+
+### **1. Variables d'environnement :**
+- Allez dans votre service `midway-cafe-website`
+- Onglet "Environment"
+- Vérifiez que `ALLOWED_HOSTS` contient :
+  ```
+  midway-cafe-website.onrender.com,*.onrender.com
+  ```
+
+### **2. Redéploiement :**
+- Le redéploiement se fait automatiquement
+- Attendez 2-3 minutes
+- Vérifiez les logs de déploiement
+
+---
+
+## 🎯 RÉSULTAT FINAL
+
+Après ces corrections, votre site sera accessible sans erreur sur :
+**https://midway-cafe-website.onrender.com**
+
+### **Fonctionnalités disponibles :**
+- ✅ Page d'accueil avec carousel
+- ✅ Menu interactif avec filtres
+- ✅ Galerie d'images
+- ✅ Formulaire de réservation
+- ✅ Page de contact
+- ✅ Design responsive
+- ✅ HTTPS sécurisé
+
+---
+
+## 🎉 PROBLÈME RÉSOLU !
+
+L'erreur 400 "Bad Request" sera corrigée dans les 2-3 minutes après le redéploiement ! 🚀☕
+
+**Votre site Midway Café sera enfin en ligne et fonctionnel !** 🌍

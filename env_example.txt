@@ -1,4 +1,3 @@
 DEBUG=False
-SECRET_KEY=your-secret-key-here
-DATABASE_URL=postgresql://user:password@host:port/database
-ALLOWED_HOSTS=your-domain.com,www.your-domain.com
+SECRET_KEY=NUrwUxyrzKzjN7BhpgQE7f9zb0PMZW2-Va2HNsrKcHFSVLVu1_e8iYKV1S1CfQKmPyw
+ALLOWED_HOSTS=midway-cafe-website.onrender.com,*.onrender.com

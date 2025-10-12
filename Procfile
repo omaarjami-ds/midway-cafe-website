@@ -1,1 +1,1 @@
-web: gunicorn midway_project.wsgi --log-file -
+web: gunicorn midway_project.wsgi:application --log-file -
