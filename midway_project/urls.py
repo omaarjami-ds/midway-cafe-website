@@ -27,6 +27,5 @@ urlpatterns = [
 # Configuration pour servir les images uploadées
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# Configuration pour servir les fichiers statiques en production
-if not settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# Configuration pour servir les fichiers statiques (développement et production)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
