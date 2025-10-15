@@ -321,7 +321,7 @@
       <a href="{% url 'contact' %}" class="btn" style="background:#6b4322; color:#fff; font-weight:600; border-radius:8px; padding:0.7rem 2.2rem; font-size:1.1rem;">EN SAVOIR PLUS</a>
     </div>
     <div class="col-12 col-md-6 d-flex justify-content-center align-items-center mt-4 mt-md-0">
-      <img src="{% static 'menu/about-barista-v2.jpg' %}" alt="Barista Midway Café" class="img-fluid rounded-4 shadow" style="max-width:440px; min-width:220px; object-fit:cover; width:100%; height:auto;" loading="lazy">
+      <img src="{% static 'menu/behyy15.png' %}" alt="Barista Midway Café" class="img-fluid rounded-4 shadow" style="max-width:440px; min-width:220px; object-fit:cover; width:100%; height:auto;" loading="lazy">
     </div>
   </div>
 </div>
@@ -455,4 +455,37 @@
   box-shadow: 0 0.8rem 2.5rem #000a;
 }
 </style>
+
+<script>
+// Script pour gérer le fallback des images de fond sur Render
+document.addEventListener('DOMContentLoaded', function() {
+    // Fonction pour tester si une image se charge
+    function testImageLoad(src, callback) {
+        const img = new Image();
+        img.onload = function() { callback(true); };
+        img.onerror = function() { callback(false); };
+        img.src = src;
+    }
+    
+    // Liste des images de fond à tester
+    const backgroundImages = [
+        { selector: '.hero-slide', localSrc: '{% static "menu/café.jpg" %}', renderSrc: 'https://midway-cafe-website.onrender.com/static/menu/café.jpg' },
+        { selector: '.patisserie-slide', localSrc: '{% static "menu/patisserie.png" %}', renderSrc: 'https://midway-cafe-website.onrender.com/static/menu/patisserie.png' },
+        { selector: '.conviviale-slide', localSrc: '{% static "menu/conviviale.jpg" %}', renderSrc: 'https://midway-cafe-website.onrender.com/static/menu/conviviale.jpg' }
+    ];
+    
+    // Tester chaque image de fond
+    backgroundImages.forEach(function(bgImage) {
+        testImageLoad(bgImage.localSrc, function(success) {
+            if (!success) {
+                // Si l'image locale ne se charge pas, utiliser l'image Render
+                const elements = document.querySelectorAll(bgImage.selector);
+                elements.forEach(function(element) {
+                    element.style.backgroundImage = 'url(' + bgImage.renderSrc + ')';
+                });
+            }
+        });
+    });
+});
+</script>
 {% endblock %}
