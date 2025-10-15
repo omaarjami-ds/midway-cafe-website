@@ -361,7 +361,7 @@
     <div class="gallery-grid">
         <!-- Image spéciale accueil -->
         <div class="gallery-item featured" onclick="openModal('https://midway-cafe-website.onrender.com/static/menu/accueil.jpg', 'Accueil Midway Café')">
-            <img src="{% static 'menu/accueil.jpg' %}" alt="Accueil Midway Café" loading="lazy" onerror="this.src='https://midway-cafe-website.onrender.com/static/menu/accueil.jpg'">
+            <img src="https://midway-cafe-website.onrender.com/static/menu/accueil.jpg" alt="Accueil Midway Café" loading="lazy" onerror="this.src='{% static 'menu/accueil.jpg' %}'">
             <div class="gallery-overlay">
                 <h3>Accueil Midway Café</h3>
                 <p>Bienvenue dans notre univers café</p>
